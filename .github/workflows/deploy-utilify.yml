@@ -1,4 +1,4 @@
-name: Build and Deploy React App via SSH
+name: Deploy Utilify
 
 on:
   push:
@@ -10,10 +10,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: public-site
 
     steps:
       - name: Checkout
