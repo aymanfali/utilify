@@ -34,5 +34,5 @@ jobs:
           REMOTE_USER: ${{ secrets.USERNAME }}
           REMOTE_PORT: ${{ secrets.PORT }}
           SOURCE: "./dist/"
-          TARGET: "/home/${{ secrets.USERNAME }}/public_html/"
+          TARGET: /home/${{ secrets.USERNAME }}/utilify/
           ARGS: "-rlgoDzvc --delete"
