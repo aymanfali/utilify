@@ -1,13 +1,14 @@
 
+
 # Utilify
 
-A concise, compelling one-line description of the project. Replace this with a short (1–2 sentence) summary explaining what the app does, the problem it solves, and who it's for.
+A lightweight starter and component collection built with React, TanStack Start, Vite, and Tailwind CSS. Utilify provides a curated set of accessible UI components (Radix + Tailwind), file-based routes, and a fast developer experience for prototyping and producing modern web apps.
 
 ---
 
 ## Visuals & Badges
 
-- (Replace with project badges: build, coverage, license, sponsor)
+- Add CI / coverage / license badges here (e.g. GitHub Actions, Codecov)
 - Screenshot placeholder:
 
 ![Screenshot placeholder](./assets/screenshot.png)
@@ -16,172 +17,171 @@ A concise, compelling one-line description of the project. Replace this with a s
 
 ## Key Features
 
-- Feature 1 — short description of how it helps users.
-- Feature 2 — short description of how it helps users.
-- Feature 3 — short description of how it helps users.
+- Reusable UI components: a collection of accessible components using Radix primitives and Tailwind styles.
+- TanStack Start example app: file-based routing, SSR-ready server entry, and example pages under `src/routes`.
+- TypeScript-first: complete TypeScript support and Vite-based dev tooling.
+- Fast DX: Vite dev server, opinionated ESLint + Prettier config, and handy scripts for building and previewing.
 
 ---
 
 ## Tech Stack
 
-- Frontend / Framework: [e.g., Nuxt 3]
-- Backend / API: [e.g., Laravel 13]
-- Styling: [e.g., Tailwind CSS]
-- State: [e.g., Pinia]
-- Database: [e.g., PostgreSQL]
-- Other: Vite, Bun, Docker (optional)
+- React 19
+- TanStack Start / Router
+- Vite (dev server & build)
+- TypeScript
+- Tailwind CSS
+- Radix UI primitives
+- Utility libraries: `clsx`, `date-fns`, `zod`, `@tanstack/react-query`
 
 ---
 
 ## Getting Started
 
-These instructions help you get a local copy up and running for development and testing purposes.
+These steps get you a working development environment using the project's existing scripts.
 
 ### Prerequisites
 
-- Node.js v16+ (or v20+ if using modern toolchains)
-- Package manager: `npm`, `pnpm`, or `yarn`
-- (Optional) Docker & Docker Compose
-- (Optional) PHP v8.3+, Composer (if backend uses PHP/Laravel)
+- Node.js v18+ (higher versions such as v20 are fine)
+- npm (bundled with Node) or `pnpm` / `yarn`
+- (Optional) Bun — a `bunfig.toml` is present if you prefer Bun workflows
 
 ### Installation
 
-1. Clone the repo:
+1. Clone the repository:
 
 ```bash
-git clone https://your.repo.url/your-repo.git
-cd your-repo
+git clone https://github.com/aymanfali/utilify.git
+cd utilify
 ```
 
-2. Install frontend dependencies:
+2. Install dependencies:
 
 ```bash
 npm install
 # or
 pnpm install
-# or
-yarn
 ```
 
-3. Copy environment example and update values:
+3. (Optional) Copy any environment example if you need to provide runtime values:
 
 ```bash
 cp .env.example .env
-# Edit .env and fill required variables
+# Edit `.env` as needed
 ```
 
-4. (If applicable) Install backend dependencies and run migrations:
-
-```bash
-# PHP/Laravel example
-composer install
-php artisan key:generate
-php artisan migrate
-
-# OR (Node backend)
-npm run prisma:migrate
-```
-
-5. Start the development server:
+4. Run the dev server:
 
 ```bash
 npm run dev
-# or
-pnpm dev
 ```
 
-The app should now be available at http://localhost:3000 (or the port your stack uses).
+Open http://localhost:5173 (Vite default) in your browser. The exact port may vary — check the console output.
 
 ---
 
 ## Environment Variables
 
-Create a `.env` file with the following variables (customize for your stack):
+This project primarily relies on Vite and server-only `.server.ts` helpers for environment access. Example env keys you might add to `.env`:
 
 ```env
-# App
-APP_ENV=development
-APP_URL=http://localhost:3000
+# Vite public vars (exposed to client):
+VITE_API_URL=http://localhost:3000
 
-# Database
-DATABASE_URL=postgres://user:pass@localhost:5432/dbname
-
-# Third-party services
-STRIPE_SECRET_KEY=
+# Server-only vars (read inside server files):
+NODE_ENV=development
+DATABASE_URL=postgres://user:pass@localhost:5432/db
 SENTRY_DSN=
-
-# Secrets
-APP_KEY=
-
-# Add any other required keys here
 ```
+
+Notes:
+- Prefix client-exposed vars with `VITE_` so Vite includes them in the client bundle.
+- Server-only code lives in files like `src/lib/*.server.ts` — those reads do not get bundled to the browser.
 
 ---
 
 ## Usage & Common Commands
 
-- Run dev server: `npm run dev`
-- Build for production: `npm run build`
-- Preview production build: `npm run preview` or `npm start`
-- Run linting: `npm run lint`
-- Run tests: `npm test` (see Tests section)
+Scripts defined in `package.json`:
 
-If your project includes a backend worker/queue, example commands:
+- `npm run dev` — Start Vite development server
+- `npm run build` — Build production bundles with Vite
+- `npm run build:dev` — Build with `development` mode
+- `npm run preview` — Preview production build locally
+- `npm run lint` — Run ESLint
+- `npm run format` — Run Prettier to format files
+
+Examples:
 
 ```bash
-# Laravel queue
-php artisan queue:work
+# Start dev server
+npm run dev
 
-# Node worker
-node ./workers/worker.js
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+
+# Lint and format
+npm run lint
+npm run format
 ```
+
+Server entry and SSR
+- The app's server entry is wired via `src/server.ts` and imports the TanStack Start server entry. This repository is ready to deploy to edge runtimes or Node-like hosts that accept a `fetch` handler.
 
 ---
 
 ## Running Tests
 
-This project uses standard testing commands. Update as appropriate for your stack.
+There are no test scripts included by default. To add testing, consider Jest, Vitest, or Playwright for end-to-end tests. Example with Vitest:
 
 ```bash
-# JavaScript/TypeScript
-npm run test
+# install
+npm install -D vitest @testing-library/react
 
-# PHP / Laravel
-php artisan test
+# run tests
+npx vitest
 ```
-
-Include guidance for running a single test file, watching tests, or debugging failures.
 
 ---
 
 ## Roadmap & Contributing
 
-- Roadmap (short):
-	- v0.1 — Core features and auth
-	- v0.2 — Payments and billing
-	- v1.0 — Production-ready release
+Planned improvements:
 
-Contributions are welcome. Please open an issue or a pull request. For larger changes, start a discussion first and follow these guidelines:
+- Polished component documentation and Storybook examples
+- CI (GitHub Actions) and test coverage reporting
+- Publish a component package for reuse across projects
 
-- Fork the repo and create a feature branch
-- Run tests and linters locally before submitting
-- Open a PR with a clear description and link to any relevant issues
+Contributing guide:
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
+- Fork the repo and create a branch for your feature: `git checkout -b feat/your-feature`
+- Run `npm install` and ensure `npm run lint` passes
+- Open a pull request describing your changes
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) (create it if you want to formalize rules).
 
 ---
 
 ## License
 
-This project is licensed under [Insert License Name] — see the `LICENSE` file for details.
+This project is currently unlicensed — add a `LICENSE` file (for example, `MIT`) to make the terms explicit.
 
 ---
 
 ## Acknowledgements
 
-- List libraries, templates, or people who helped.
+- Built with TanStack Start starter templates and Radix UI primitives
+- Tailwind CSS for utility-first styling
 
 ---
 
-If you want, I can: add a screenshot, generate a `CONTRIBUTING.md`, or fill in the stack-specific commands. 
+If you'd like, I can:
+
+- Add real screenshots and CI badges
+- Generate a `CONTRIBUTING.md` and `LICENSE` file (MIT)
+- Add a simple `vitest` test setup and sample test
+
 
