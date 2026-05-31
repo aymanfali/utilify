@@ -1,31 +1,54 @@
 import { createFileRoute } from "@tanstack/react-router";
 import React, { useMemo, useState } from "react";
 import {
-  Braces, Type, FileText, Binary, Link2, KeyRound, Box, Palette,
-  Search, Wrench, Menu, X,
+  Braces,
+  Type,
+  FileText,
+  Binary,
+  Link2,
+  KeyRound,
+  Box,
+  Palette,
+  Search,
+  Wrench,
+  Menu,
+  X,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ResponsiveBannerAd, AdSlot } from "@/components/AdSlot";
 import {
-  JsonTool, CaseTool, CounterTool, Base64Tool, UrlTool,
-  PasswordTool, ShadowTool, PaletteTool,
+  JsonTool,
+  CaseTool,
+  CounterTool,
+  Base64Tool,
+  UrlTool,
+  PasswordTool,
+  ShadowTool,
+  PaletteTool,
 } from "@/components/tools/tools";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Utilify — Free Online Developer & Text Utility Tools" },
-      { name: "description", content: "Fast, private, zero-server utility tools: JSON formatter, Base64, URL encoder, password generator, color palette, CSS shadow and more. Runs entirely in your browser." },
+      {
+        name: "description",
+        content:
+          "Fast, private, zero-server utility tools: JSON formatter, Base64, URL encoder, password generator, color palette, CSS shadow and more. Runs entirely in your browser.",
+      },
       { property: "og:title", content: "Utilify — All-in-One Online Utility Tools" },
-      { property: "og:description", content: "JSON, Base64, URL, password, palette, CSS shadow — all in one fast browser-based dashboard." },
+      {
+        property: "og:description",
+        content:
+          "JSON, Base64, URL, password, palette, CSS shadow — all in one fast browser-based dashboard.",
+      },
     ],
   }),
   component: Index,
 });
 
-type ToolId =
-  | "json" | "case" | "counter" | "base64" | "url" | "password" | "shadow" | "palette";
+type ToolId = "json" | "case" | "counter" | "base64" | "url" | "password" | "shadow" | "palette";
 
 type Tool = {
   id: ToolId;
@@ -37,14 +60,70 @@ type Tool = {
 };
 
 const TOOLS: Tool[] = [
-  { id: "json", name: "JSON Formatter", category: "Text & Data", icon: Braces, description: "Pretty-print, minify and validate JSON.", Component: JsonTool },
-  { id: "case", name: "Case Converter", category: "Text & Data", icon: Type, description: "UPPER, lower, camel, snake, kebab, slug.", Component: CaseTool },
-  { id: "counter", name: "Word & Character Counter", category: "Text & Data", icon: FileText, description: "Live word, character and reading-time stats.", Component: CounterTool },
-  { id: "base64", name: "Base64 Encoder / Decoder", category: "Coding & DevOps", icon: Binary, description: "Encode and decode Base64 safely client-side.", Component: Base64Tool },
-  { id: "url", name: "URL Encoder / Decoder", category: "Coding & DevOps", icon: Link2, description: "Encode query strings and special characters.", Component: UrlTool },
-  { id: "password", name: "Password Generator", category: "Coding & DevOps", icon: KeyRound, description: "Cryptographically secure passwords.", Component: PasswordTool },
-  { id: "shadow", name: "CSS Shadow & Radius", category: "Design Helpers", icon: Box, description: "Visual editor with copyable CSS / Tailwind.", Component: ShadowTool },
-  { id: "palette", name: "Color Palette Generator", category: "Design Helpers", icon: Palette, description: "Hit Space for a new palette. Click to copy.", Component: PaletteTool },
+  {
+    id: "json",
+    name: "JSON Formatter",
+    category: "Text & Data",
+    icon: Braces,
+    description: "Pretty-print, minify and validate JSON.",
+    Component: JsonTool,
+  },
+  {
+    id: "case",
+    name: "Case Converter",
+    category: "Text & Data",
+    icon: Type,
+    description: "UPPER, lower, camel, snake, kebab, slug.",
+    Component: CaseTool,
+  },
+  {
+    id: "counter",
+    name: "Word & Character Counter",
+    category: "Text & Data",
+    icon: FileText,
+    description: "Live word, character and reading-time stats.",
+    Component: CounterTool,
+  },
+  {
+    id: "base64",
+    name: "Base64 Encoder / Decoder",
+    category: "Coding & DevOps",
+    icon: Binary,
+    description: "Encode and decode Base64 safely client-side.",
+    Component: Base64Tool,
+  },
+  {
+    id: "url",
+    name: "URL Encoder / Decoder",
+    category: "Coding & DevOps",
+    icon: Link2,
+    description: "Encode query strings and special characters.",
+    Component: UrlTool,
+  },
+  {
+    id: "password",
+    name: "Password Generator",
+    category: "Coding & DevOps",
+    icon: KeyRound,
+    description: "Cryptographically secure passwords.",
+    Component: PasswordTool,
+  },
+  {
+    id: "shadow",
+    name: "CSS Shadow & Radius",
+    category: "Design Helpers",
+    icon: Box,
+    description: "Visual editor with copyable CSS / Tailwind.",
+    Component: ShadowTool,
+  },
+  {
+    id: "palette",
+    name: "Color Palette Generator",
+    category: "Design Helpers",
+    icon: Palette,
+    description: "Hit Space for a new palette. Click to copy.",
+    Component: PaletteTool,
+  },
 ];
 
 function Index() {
@@ -53,7 +132,10 @@ function Index() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const filtered = useMemo(
-    () => TOOLS.filter((t) => (t.name + t.category + t.description).toLowerCase().includes(query.toLowerCase())),
+    () =>
+      TOOLS.filter((t) =>
+        (t.name + t.category + t.description).toLowerCase().includes(query.toLowerCase()),
+      ),
     [query],
   );
 
@@ -74,7 +156,9 @@ function Index() {
         </div>
         <div>
           <h1 className="text-sm font-semibold tracking-tight">Utilify</h1>
-          <p className="text-[10px] uppercase tracking-widest text-muted-foreground">Online Utility Suite</p>
+          <p className="text-[10px] uppercase tracking-widest text-muted-foreground">
+            Online Utility Suite
+          </p>
         </div>
         <button
           className="ml-auto rounded p-1 text-muted-foreground hover:bg-accent md:hidden"
@@ -98,7 +182,9 @@ function Index() {
       <nav className="flex-1 overflow-y-auto px-2 pb-4">
         {Object.entries(grouped).map(([cat, items]) => (
           <div key={cat} className="mb-4">
-            <div className="px-2 py-1 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">{cat}</div>
+            <div className="px-2 py-1 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+              {cat}
+            </div>
             <ul className="space-y-0.5">
               {items.map((t) => {
                 const Icon = t.icon;
@@ -106,9 +192,14 @@ function Index() {
                 return (
                   <li key={t.id}>
                     <button
-                      onClick={() => { setActive(t.id); setMobileOpen(false); }}
+                      onClick={() => {
+                        setActive(t.id);
+                        setMobileOpen(false);
+                      }}
                       className={`flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm transition-colors ${
-                        isActive ? "bg-primary/15 text-primary" : "text-foreground/80 hover:bg-accent"
+                        isActive
+                          ? "bg-primary/15 text-primary"
+                          : "text-foreground/80 hover:bg-accent"
                       }`}
                     >
                       <Icon className="h-4 w-4 shrink-0" />
@@ -121,7 +212,9 @@ function Index() {
           </div>
         ))}
         {filtered.length === 0 && (
-          <p className="px-3 py-6 text-center text-sm text-muted-foreground">No tools match "{query}"</p>
+          <p className="px-3 py-6 text-center text-sm text-muted-foreground">
+            No tools match "{query}"
+          </p>
         )}
       </nav>
     </aside>
@@ -173,8 +266,16 @@ function Index() {
               <AdSlot size="square" />
             </div>
 
-            <footer className="pt-4 text-center text-xs text-muted-foreground">
-              All processing happens locally in your browser · No data leaves your device
+            <footer className="flex flex-col gap-2 pt-4 text-center text-xs text-muted-foreground">
+              <span>
+                All processing happens locally in your browser · No data leaves your device
+              </span>
+              <span>
+                Created by{" "}
+                <a href="https://aymanfahd.com" className="font-bold text-blue-600">
+                  Ayman Fahd
+                </a>
+              </span>
             </footer>
           </main>
 
