@@ -40,16 +40,16 @@ jobs:
           cp package-lock.json deploy/ || true
 
           cat <<EOF > deploy/.htaccess
-# cPanel Node.js App Safe Mode
-
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ - [L]
-
-Header always set X-Content-Type-Options "nosniff"
-Header always set X-Frame-Options "SAMEORIGIN"
-EOF
+          # cPanel Node.js App Safe Mode
+          
+          RewriteEngine On
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteRule ^ - [L]
+          
+          Header always set X-Content-Type-Options "nosniff"
+          Header always set X-Frame-Options "SAMEORIGIN"
+          EOF
 
       - name: Deploy to cPanel
         uses: easingthemes/ssh-deploy@main
