@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  
+
   workflow_dispatch:
 
 jobs:
@@ -18,10 +18,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: 25
+          node-version: 20
+          cache: npm
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build App
         run: npm run build
@@ -33,6 +34,6 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           REMOTE_PORT: ${{ secrets.PORT }}
-          SOURCE: "./dist/"
+          SOURCE: "dist/"
           TARGET: /home/${{ secrets.USERNAME }}/utilify/
           ARGS: "-rlgoDzvc --delete"
