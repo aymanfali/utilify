@@ -162,26 +162,3 @@ Contributing guide:
 - Open a pull request describing your changes
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) (create it if you want to formalize rules).
-
----
-
-## License
-
-This project is currently unlicensed — add a `LICENSE` file (for example, `MIT`) to make the terms explicit.
-
----
-
-## Acknowledgements
-
-- Built with TanStack Start starter templates and Radix UI primitives
-- Tailwind CSS for utility-first styling
-
----
-
-If you'd like, I can:
-
-- Add real screenshots and CI badges
-- Generate a `CONTRIBUTING.md` and `LICENSE` file (MIT)
-- Add a simple `vitest` test setup and sample test
-
-
