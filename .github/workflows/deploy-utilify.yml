@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version: 20
           cache: npm
 
       - name: Install Dependencies
@@ -27,13 +27,29 @@ jobs:
       - name: Build App
         run: npm run build
 
-      # Create clean deploy folder
+      - name: Verify Build Output
+        run: ls -R dist
+
       - name: Prepare Deployment Package
         run: |
+          rm -rf deploy
           mkdir deploy
+
           cp -r dist deploy/
           cp package.json deploy/
           cp package-lock.json deploy/ || true
+
+          cat <<EOF > deploy/.htaccess
+# cPanel Node.js App Safe Mode
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ - [L]
+
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+EOF
 
       - name: Deploy to cPanel
         uses: easingthemes/ssh-deploy@main
