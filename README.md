@@ -39,3 +39,24 @@ components/
   tools.tsx      # all 8 tools (vanilla JS, client-side only)
 lib/utils.ts     # cn() helper
 ```
+<<<<<<< HEAD
+=======
+
+---
+
+## Roadmap & Contributing
+
+Planned improvements:
+
+- Polished component documentation and Storybook examples
+- CI (GitHub Actions) and test coverage reporting
+- Publish a component package for reuse across projects
+
+Contributing guide:
+
+- Fork the repo and create a branch for your feature: `git checkout -b feat/your-feature`
+- Run `npm install` and ensure `npm run lint` passes
+- Open a pull request describing your changes
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) (create it if you want to formalize rules).
+>>>>>>> 7b3afb1553403d454db9bdea63b5a26f325087d4
