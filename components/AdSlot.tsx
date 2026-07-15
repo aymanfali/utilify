@@ -1,31 +1,57 @@
+"use client";
+
+import { useEffect } from "react";
+
+declare global {
+  interface Window {
+    adsbygoogle: unknown[];
+  }
+}
+
 type Size = "banner" | "mobileBanner" | "skyscraper" | "square";
 
-const sizes: Record<Size, { w: number; h: number; label: string }> = {
-  banner: { w: 728, h: 90, label: "728 × 90" },
-  mobileBanner: { w: 320, h: 100, label: "320 × 100" },
-  skyscraper: { w: 300, h: 600, label: "300 × 600" },
-  square: { w: 300, h: 250, label: "300 × 250" },
+const adSlots: Record<Size, string> = {
+  banner: "YOUR_BANNER_SLOT_ID",
+  mobileBanner: "YOUR_MOBILE_SLOT_ID",
+  skyscraper: "YOUR_SKYSCRAPER_SLOT_ID",
+  square: "YOUR_SQUARE_SLOT_ID",
 };
 
-export function AdSlot({ size, className = "" }: { size: Size; className?: string }) {
-  const s = sizes[size];
+export function AdSlot({
+  size,
+  className = "",
+}: {
+  size: Size;
+  className?: string;
+}) {
+  useEffect(() => {
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch {}
+  }, []);
+
   return (
-    <div
-      className={`flex flex-col items-center justify-center rounded-md border border-dashed border-border bg-muted/30 text-muted-foreground ${className}`}
-      style={{ width: s.w, height: s.h, maxWidth: "100%" }}
-      aria-label="Sponsored Advertisement"
-    >
-      <span className="text-[10px] uppercase tracking-widest opacity-60">Sponsored Advertisement</span>
-      <span className="mt-1 text-xs font-mono opacity-50">{s.label}</span>
-    </div>
+    <ins
+      className={`adsbygoogle ${className}`}
+      style={{ display: "block" }}
+      data-ad-client="ca-pub-5549712635720663"
+      data-ad-slot={adSlots[size]}
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    />
   );
 }
 
 export function ResponsiveBannerAd() {
   return (
     <>
-      <div className="hidden md:flex justify-center"><AdSlot size="banner" /></div>
-      <div className="flex md:hidden justify-center"><AdSlot size="mobileBanner" /></div>
+      <div className="hidden md:block">
+        <AdSlot size="banner" />
+      </div>
+
+      <div className="block md:hidden">
+        <AdSlot size="mobileBanner" />
+      </div>
     </>
   );
 }
